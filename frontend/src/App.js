@@ -1,8 +1,8 @@
 import React from 'react';
 
 // import components
-import HamburgerMenu from './components/hamburgerMenu';
-import MapComponent from './components/map';
+import HamburgerMenu from './components/HamburgerMenu.jsx';
+import MapComponent from './components/Map.jsx';
 import './App.css';
 
 function App() {
