@@ -1,0 +1,11 @@
+.leaflet-popup-content {
+  font-size: 1.2em; /* Adjust font size for better readability */
+}
+
+.leaflet-marker-icon {
+  transform: scale(1.5); /* Scale up marker icons */
+}
+
+.leaflet-control-attribution {
+  font-size: 1.2em; /* Adjust attribution font size */
+}
