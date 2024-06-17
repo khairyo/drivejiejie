@@ -14,20 +14,23 @@ const center = {
   lng: 103.835936
 };
 
+const options = {
+  disableDefaultUI: true,
+};
+
 function MapComponent() {
   return (
-    <LoadScript
-      googleMapsApiKey={GOOGLE_MAPS_API_KEY}
-    >
+    <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
         zoom={16}
+        options={options}
       >
         <Marker position={center} />
       </GoogleMap>
     </LoadScript>
-  )
+  );
 }
 
 export default MapComponent;

@@ -1,13 +1,14 @@
 import React from 'react';
 
 // import components
-import SearchBar from './components/searchBar.jsx';
-import MapComponent from './components/map.jsx';
+import HamburgerMenu from './components/hamburgerMenu';
+import MapComponent from './components/map';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <SearchBar />
+      <HamburgerMenu />
       <MapComponent />
     </div>
   );
