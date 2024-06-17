@@ -3,8 +3,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 
-import '../css/HamburgerMenu.component.css';
-
 export default function HamburgerMenu() {
   return (
     <Paper
