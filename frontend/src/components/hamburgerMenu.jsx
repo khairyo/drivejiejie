@@ -14,5 +14,5 @@ export default function HamburgerMenu() {
         <MenuIcon />
       </IconButton>
     </Paper>
-  );  
+  ); 
 }
