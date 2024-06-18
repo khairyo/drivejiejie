@@ -11,13 +11,23 @@ import GasStationDialog from './components/GasStationDialog.jsx';
 import './App.css'; 
  
 function App() { 
+
+  // custom styling (button)
+  const buttonStyles = {
+    backgroundColor: 'var(--primary-color)',
+    borderRadius: 'var(--border-radius)',
+    color: 'white',
+    textTransform: 'none',
+    fontFamily: 'var(--font-family)',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+    marginLeft: '10px',
+  };
  
+  // gas station dialog 
   const [open, setOpen] = useState(false); 
- 
   const handleClickOpen = () => { 
     setOpen(true); 
   }; 
- 
   const handleClose = () => { 
     setOpen(false); 
   }; 
@@ -27,9 +37,9 @@ function App() {
  
       <div className="menu-bar"> 
         <HamburgerMenu className="hamburger-menu"/> 
-        <Button className="button" variant="contained" color="primary">Carparks</Button> 
-        <Button className="button" variant="contained" color="primary" onClick={handleClickOpen}>Gas stations</Button> 
-        <Button className="button" variant="contained" color="primary">Vehicle services</Button> 
+        <Button sx={buttonStyles} variant="contained">Carparks</Button> 
+        <Button sx={buttonStyles} variant="contained" onClick={handleClickOpen}>Gas stations</Button> 
+        <Button sx={buttonStyles} variant="contained">Vehicle services</Button> 
       </div> 
  
       <MapComponent /> 
