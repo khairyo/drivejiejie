@@ -12,7 +12,7 @@ import './App.css';
  
 function App() { 
 
-  // custom styling (button)
+  // MUI component custom styling (button)
   const buttonStyles = {
     backgroundColor: 'var(--primary-color)',
     borderRadius: 'var(--border-radius)',
