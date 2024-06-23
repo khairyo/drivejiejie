@@ -1,32 +1,25 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Home } from './pages/Home'
-import { LoginPage } from './pages/loginPage';
-import { RegisterPage } from './pages/registerPage';
-
-
 // import components
 import HamburgerMenu from './components/HamburgerMenu.jsx';
 import MapComponent from './components/Map.jsx';
 import { Button } from '@mui/material';
 
-// import css
-import './App.css';
 
 function App() {
-    return (
-      <Router>
-        <div>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-          </Routes>
-        </div>
-      </Router>
-  
-    );
-  };
+  return (
+    <div className="App">
+
+      <div className="menu-bar">
+        <HamburgerMenu className="hamburger-menu"/>
+        <Button className="button" variant="contained" color="primary">Carparks</Button>
+        <Button className="button" variant="contained" color="primary">Gas stations</Button>
+        <Button className="button" variant="contained" color="primary">Vehicle services</Button>
+      </div>
+
+      <MapComponent />
+    </div>
+  );
+}
 
 export default App;
