@@ -106,24 +106,19 @@ export default function GasStationTable({ onSearch }) {
               </TableRow>
             ))}
             <TableRow sx={{ height: 'auto' }}>
-              <TableCell align="left"></TableCell>
-              <RadioGroup 
-                row 
-                sx={{ display: 'contents' }}
-                value={selectedStation}
-                onChange={(e) => setSelectedStation(e.target.value)}
-              >
-                {headers.slice(1).map((header, index) => (
-                  <TableCell key={index} align="right" sx={{ padding: '12px 20px' }}>
-                    <FormControlLabel
-                      value={header.label}
-                      control={<Radio sx={{ padding: '0' }} />}
-                      label=""
-                      sx={{ margin: '0' }}
-                    />
-                  </TableCell>
-                ))}
-              </RadioGroup>
+              <TableCell align="left">Select</TableCell>
+              {headers.slice(1).map((header, index) => (
+                <TableCell key={index} align="right" sx={{ padding: '12px 20px' }}>
+                  <FormControlLabel
+                    value={header.label}
+                    control={<Radio sx={{ padding: '0' }} />}
+                    label=""
+                    sx={{ margin: '0' }}
+                    checked={selectedStation === header.label}
+                    onChange={(e) => setSelectedStation(e.target.value)}
+                  />
+                </TableCell>
+              ))}
             </TableRow>
           </TableBody>
         </Table>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '100%',
@@ -20,7 +20,7 @@ function MapComponent({ searchQuery }) {
   const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
-    if (map && searchQuery && window.google) {
+    if (map && searchQuery) {
       const service = new window.google.maps.places.PlacesService(map);
       const request = {
         query: searchQuery,
@@ -34,25 +34,29 @@ function MapComponent({ searchQuery }) {
           }));
           setMarkers(newMarkers);
           map.setCenter(results[0].geometry.location);
+        } else {
+          console.error('PlacesService failed due to:', status);
         }
       });
     }
   }, [map, searchQuery]);
 
+  const onLoad = (mapInstance) => {
+    setMap(mapInstance);
+  };
+
   return (
-    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={16}
-        options={options}
-        onLoad={(mapInstance) => setMap(mapInstance)}
-      >
-        {markers.map((marker, index) => (
-          <Marker key={index} position={marker.position} />
-        ))}
-      </GoogleMap>
-    </LoadScript>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={16}
+      options={options}
+      onLoad={onLoad}
+    >
+      {markers.map((marker, index) => (
+        <Marker key={index} position={marker.position} />
+      ))}
+    </GoogleMap>
   );
 }
 
