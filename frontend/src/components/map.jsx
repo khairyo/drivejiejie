@@ -23,17 +23,20 @@ function MapComponent({ searchQuery }) {
     if (map && searchQuery) {
       const service = new window.google.maps.places.PlacesService(map);
       const request = {
-        query: searchQuery,
-        fields: ['name', 'geometry'],
+        location: center,
+        radius: '5000', // 5 km radius
+        keyword: searchQuery, // Keyword to search for
       };
 
-      service.findPlaceFromQuery(request, (results, status) => {
+      service.nearbySearch(request, (results, status) => {
         if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
           const newMarkers = results.map((place) => ({
             position: place.geometry.location,
           }));
           setMarkers(newMarkers);
-          map.setCenter(results[0].geometry.location);
+          if (results[0]) {
+            map.setCenter(results[0].geometry.location);
+          }
         } else {
           console.error('PlacesService failed due to:', status);
         }
@@ -49,7 +52,7 @@ function MapComponent({ searchQuery }) {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={16}
+      zoom={14}
       options={options}
       onLoad={onLoad}
     >
