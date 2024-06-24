@@ -24,8 +24,8 @@ function MapComponent({ searchQuery }) {
       const service = new window.google.maps.places.PlacesService(map);
       const request = {
         location: center,
-        radius: '5000', // 5 km radius
-        keyword: searchQuery, // Keyword to search for
+        radius: '5000',
+        keyword: searchQuery, 
       };
 
       service.nearbySearch(request, (results, status) => {
