@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 
 // import components
-import HamburgerMenu from './components/HamburgerMenu.jsx';
-import MapComponent from './components/Map.jsx';
+import MapComponent from './components/map.jsx';
 import GasStationDialog from './components/GasStationDialog.jsx';
+import Menu from './components/menu.jsx';
 
 // import css
 import './App.css';
@@ -31,10 +31,20 @@ function App() {
         setOpen(false);
     };
 
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    // const handleMenuClick = () => {
+    //     setMenuOpen(true);
+    // };
+
+    const handleMenuClose = () => {
+        setMenuOpen(false);
+    };
+
     return (
         <div className="App">
             <div className="menu-bar">
-                <HamburgerMenu className="hamburger-menu" />
+                <Menu open={menuOpen} onClose={handleMenuClose} />
                 <Button sx={buttonStyles} variant="contained">
                     Carparks
                 </Button>

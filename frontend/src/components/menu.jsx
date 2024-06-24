@@ -1,66 +1,88 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
 
-export default function Sidebar() {
-    const [open, setOpen] = useState(false);
+export default function HamburgerMenu() {
+    const [open, setOpen] = React.useState(false);
 
-    const toggleDrawer = (open) => (event) => {
-        if (
-            event.type === 'keydown' &&
-            (event.key === 'Tab' || event.key === 'Shift')
-        ) {
-            return;
-        }
-        setOpen(open);
+    const toggleDrawer = (newOpen) => () => {
+        setOpen(newOpen);
     };
+
+    const DrawerList = (
+        <Box
+            sx={{ width: 250 }}
+            role="presentation"
+            onClick={toggleDrawer(false)}
+        >
+            <List>
+                {['Inbox', 'Starred', 'Send email', 'Drafts'].map(
+                    (text, index) => (
+                        <ListItem key={text} disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    {index % 2 === 0 ? (
+                                        <InboxIcon />
+                                    ) : (
+                                        <MailIcon />
+                                    )}
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                    )
+                )}
+            </List>
+            <Divider />
+            <List>
+                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                    <ListItem key={text} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                            </ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+        </Box>
+    );
 
     return (
         <div>
-            <Paper
-                className="hamburger-menu"
-                sx={{
-                    p: '2px 4px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    width: 43,
-                    borderRadius: '30px',
-                }}
-            >
-                <IconButton
-                    sx={{ p: '10px' }}
-                    aria-label="menu"
-                    onClick={toggleDrawer(true)}
+            <Button onClick={toggleDrawer(true)}>
+                <Paper
+                    // component="form"
+                    className="hamburger-menu"
+                    sx={{
+                        p: '2px 4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        width: 43,
+                        borderRadius: '30px',
+                    }}
                 >
-                    <MenuIcon />
-                </IconButton>
-            </Paper>
-            <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-                <div
-                    role="presentation"
-                    onClick={toggleDrawer(false)}
-                    onKeyDown={toggleDrawer(false)}
-                >
-                    <List>
-                        <ListItem>
-                            <div className="sidebar-header">
-                                <div className="profile-pic"></div>
-                                <h2>Hi, khairyo!</h2>
-                                <p>sushimallows8@gmail.com</p>
-                            </div>
-                        </ListItem>
-                        <Divider />
-                        <ListItem button>
-                            <ListItemText primary="Tips" />
-                        </ListItem>
-                    </List>
-                </div>
+                    <IconButton sx={{ p: '10px' }} aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                </Paper>
+            </Button>
+            <Drawer open={open} onClose={toggleDrawer(false)}>
+                {DrawerList}
             </Drawer>
         </div>
     );
