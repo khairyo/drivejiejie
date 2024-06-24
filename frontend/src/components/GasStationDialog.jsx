@@ -57,7 +57,7 @@ export default function GasStationDialog({ open, onClose }) {
       </DialogContent> 
 
       <DialogActions> 
-        <Button sx={{ buttonStyle }} onClick={onClose} variant="contained">Search</Button> 
+        <Button sx={{ ...buttonStyle }} onClick={onClose} variant="contained">Search</Button> 
       </DialogActions> 
     </Dialog> 
   ); 
