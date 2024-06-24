@@ -7,6 +7,9 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from geojson import Point
 from geojson_pydantic import Feature, FeatureCollection, Point
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 app = Flask(__name__)
 
@@ -53,20 +56,22 @@ def create_tip():
     use this end point to create tips to be stored in db
     """
     try:
-        data = request.get_json()
-        carpark_insert=Carpark(name=data.get('name'),
-                        address=data.get('address'),
-                        location=data.get('location'),
-                        parking_rate=[]
-                        ).model_dump()
-        rates=data.get('parkingRate')
-        for i in rates:
-            carpark_insert['parking_rate'].append(Parking(period=i['period'],
-                                                              fee=i['fee'],
-                                                              per_min_charge=i['perMinCharge']).model_dump())
+        all_data = request.get_json().get('carparks')
+        print(all_data)
+        for data in all_data:
+            carpark_insert=Carpark(name=data['name'],
+                            address=data['address'],
+                            location=data['location'],
+                            parking_rate=[]
+                            ).model_dump()
+            rates=data.get('parkingRate')
+            for i in rates:
+                carpark_insert['parking_rate'].append(Parking(period=i['period'],
+                                                                fee=i['fee'],
+                                                                per_min_charge=i['perMinCharge']).model_dump())
 
-        result = carpark_collection.insert_one(carpark_insert)
-        print(result)
+            result = carpark_collection.insert_one(carpark_insert)
+            print(result)
         return jsonify(
             {
                 "code": 201,
