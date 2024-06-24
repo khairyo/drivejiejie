@@ -36,12 +36,14 @@ export function Home() {
 
             <div className="menu-bar">
                 <HamburgerMenu className="hamburger-menu" />
-                <Button className="button" variant="contained" color="primary">Carparks</Button>
-                <Button className="button" variant="contained" color="primary">Gas stations</Button>
-                <Button className="button" variant="contained" color="primary">Vehicle services</Button>
+                <Button sx={buttonStyles} variant="contained" color="primary">Carparks</Button>
+                <Button sx={buttonStyles} variant="contained" color="primary" onClick={handleClickOpen}>Gas stations</Button>
+                <Button sx={buttonStyles} variant="contained" color="primary">Vehicle services</Button>
             </div>
 
             <MapComponent />
+
+            <GasStationDialog open={open} onClose={handleClose} />
             
         </div>
     );
