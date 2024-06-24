@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import HamburgerMenu from '../components/HamburgerMenu.jsx';
 import MapComponent from '../components/Map.jsx';
 import GasStationDialog from '../components/GasStationDialog.jsx';
+import driveJieJieLogo from '../images/drivejiejie-logo-blue.png';
 import { Button } from '@mui/material';
 
 // import styles
@@ -45,6 +46,11 @@ export function Home() {
       <MapComponent searchQuery={searchQuery} />
 
       <GasStationDialog open={open} onClose={handleClose} onSearch={handleSearch} />
+
+      <div className="drivejiejie-logo-container">
+          <img src={driveJieJieLogo} alt="DriveJieJie Logo" className="drivejiejie-logo" />
+          <span>Drive</span>JieJie
+      </div>
     </div>
   );
 }

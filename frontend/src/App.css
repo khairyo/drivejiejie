@@ -1,5 +1,6 @@
 :root {
   --primary-color: #007BFF;
+  --secondary-color: #FFC604;
   --border-radius: 25px;
   --font-family: 'Outfit', sans-serif;
 }
@@ -29,6 +30,29 @@ body {
   background-color: white;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.drivejiejie-logo-container {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: var(--font-family);
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.drivejiejie-logo {
+  width: auto;
+  height: 26px;
+  margin-right: 5px;
+}
+
+.drivejiejie-logo-container span {
+  color: var(--primary-color);
 }
 
 /* Keith's CSS for login page */
