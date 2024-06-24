@@ -6,7 +6,6 @@ import { Button } from '@mui/material';
 import HamburgerMenu from './components/HamburgerMenu.jsx';
 import MapComponent from './components/Map.jsx';
 import GasStationDialog from './components/GasStationDialog.jsx';
-import Sidebar from './components/Menu.jsx';
 
 // import css
 import './App.css';
