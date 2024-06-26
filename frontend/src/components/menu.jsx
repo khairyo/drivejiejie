@@ -15,8 +15,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import iconImage from '../images/drivejiejie-logo-blue.png';
+import tipImage from '../images/tips-logo.png';
 
-export default function HamburgerMenu({ email }) {
+export default function HamburgerMenu({ email, userName }) {
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen) => () => {
@@ -77,7 +78,7 @@ export default function HamburgerMenu({ email }) {
                 >
                     <Avatar sx={{ bgcolor: 'grey' }}>A</Avatar>
                     <Box ml={2}>
-                        <Typography variant="body1">Hi, khairyo!</Typography>
+                        <Typography variant="body1">Hi, {userName}</Typography>
                         <Typography variant="body2" color="textSecondary">
                             {email.length > 23
                                 ? email.slice(0, 23) + '...'
@@ -90,16 +91,27 @@ export default function HamburgerMenu({ email }) {
                 sx={{
                     backgroundColor: 'yellow',
                     height: '2px',
-                    width: '80%',
+                    width: '85%',
                     ml: 'auto',
                 }}
             />
             <Box sx={{ backgroundColor: 'white', padding: '16px' }}>
                 <List>
                     {['Tips'].map((text) => (
-                        <ListItem key={text} disablePadding>
+                        <ListItemButton key={text} disablePadding>
+                            <ListItemIcon>
+                                <img
+                                    src={tipImage}
+                                    alt="Tips Logo"
+                                    style={{
+                                        width: 24,
+                                        height: 24,
+                                        marginLeft: '26px',
+                                    }}
+                                />
+                            </ListItemIcon>
                             <ListItemText primary={text} />
-                        </ListItem>
+                        </ListItemButton>
                     ))}
                 </List>
             </Box>
