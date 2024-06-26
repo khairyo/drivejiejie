@@ -40,11 +40,13 @@ function App() {
     const handleMenuClose = () => {
         setMenuOpen(false);
     };
+    // const email = 'sushimallows8@gmail.com';
+    const [email, setEmail] = useState('sushimallows8@gmail.com');
 
     return (
         <div className="App">
             <div className="menu-bar">
-                <Menu open={menuOpen} onClose={handleMenuClose} />
+                <Menu email={email} open={menuOpen} onClose={handleMenuClose} />
                 <Button sx={buttonStyles} variant="contained">
                     Carparks
                 </Button>

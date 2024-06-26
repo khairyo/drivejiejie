@@ -16,7 +16,7 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import iconImage from '../images/drivejiejie-logo-blue.png';
 
-export default function HamburgerMenu() {
+export default function HamburgerMenu({ email }) {
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen) => () => {
@@ -79,7 +79,9 @@ export default function HamburgerMenu() {
                     <Box ml={2}>
                         <Typography variant="body1">Hi, khairyo!</Typography>
                         <Typography variant="body2" color="textSecondary">
-                            sushimallows8@gmail.com
+                            {email.length > 23
+                                ? email.slice(0, 23) + '...'
+                                : email}
                         </Typography>
                     </Box>
                 </Box>
