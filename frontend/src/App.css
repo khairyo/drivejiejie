@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 :root {
   --primary-color: #007BFF;
   --secondary-color: #FFC604;
@@ -28,7 +30,7 @@ body {
 .hamburger-menu {
   margin-right: 10px;
   background-color: white;
-  border-radius: 4px;
+  border-radius: 25px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
