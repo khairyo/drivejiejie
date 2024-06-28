@@ -1,30 +1,58 @@
-import React from 'react';
-
-// import components
-import { Button } from '@mui/material';
+import { React, useState } from 'react';
+import axios from 'axios';
 
 // import css
 import '../App.css';
+import djjlogo from '../images/drivejiejie-logo-blue.png';
 
 export function LoginPage() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        axios.post('http://127.0.0.1:8004/createuser', { username, password })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
+
     return (
-        <div className="login-page">
-            <div className="login-white-bg">
+        <div className="auth-page">
+            <div className="auth-white-bg">
                 <div className="form-box">
                     <p className="outfit-font">Welcome Back!</p>
                     <p className="outfit-font2">It's terrific to see you again.</p>
-                    <form className="login-form" method="POST" name="login_form">
+                    <form method="POST" name="login_form" onSubmit={handleSubmit}>
                         <div className='input-group'>
                             <div className='input-field'>
-                                <input type='text' className='login-text-field' name='username' placeholder='Username' />
+                                <input type='text'
+                                    name='username'
+                                    required
+                                    value={username}
+                                    onChange={(event) => { setUsername(event.target.value) }}
+                                    className='login-text-field'
+                                    placeholder='Username' 
+                                    autoComplete="off" />
                             </div>
                             <div className='input-field'>
-                                <input type='password' className='login-text-field' name='password' placeholder='Password' />
+                                <input type='password'
+                                    name='password'
+                                    required
+                                    className='login-text-field'
+                                    value={password}
+                                    onChange={(event) => { setPassword(event.target.value) }}
+                                    placeholder='Password'
+                                    autoComplete="off" />
                             </div>
                         </div>
 
-                        <div classname="login-btn">
-                            <Button type='submit'>Let's Go!</Button>
+                        <div className='login-btn-location'>
+                            <input className='login-btn' type='submit' value="Let's Go!" />
                         </div>
                     </form>
 
@@ -32,51 +60,26 @@ export function LoginPage() {
                         <a href='./register'>First time? Sign up here</a>
                     </div>
                 </div>
-
-
             </div>
 
-            <div className="login-yellow-bg">
-                <div className='login-icon'>
-                    
+            <div className="auth-yellow-bg">
+                <img className='auth-djj-icon' src={djjlogo} alt='"logo' />
+                <div className='auth-djj-logotext'>
+                    <span className='auth-djj-text-blue'>drive</span>
+                    <span className='auth-djj-text-black'>JieJie</span>
+                </div>
+                <br />
+                <div className='auth-djj-slogantext'>
+                    <span className='auth-djj-slogan-black'>"Your </span>
+                    <span className='auth-djj-slogan-blue'>ultimate </span>
+                    <span className='auth-djj-slogan-black'>driving</span> <br />
+                    <span className='auth-djj-slogan-black'>companion."</span>
                 </div>
             </div>
         </div>
     );
 };
 
-function loginAuthentication() {
-    // INCOMPLETE
-    var username = document.forms['login_form']['username']
-    var password = document.forms['login_form']['password']
 
-    var username_error = document.getElementById('username_error');
-    var password_error = document.getElementById('password_error');
-
-    username.addEventListener('textInput', username_verify);
-    password.addEventListener('textInput', password_verify);
-
-    function validated() {
-        if (username.value.length < 1) {
-            return false;
-        }
-        if (password.value.length < 1) {
-            return false;
-        }
-        return true;
-        // any restrictions?
-    }
-
-    function username_verify() {
-        return true;
-        // add api calls
-    }
-
-    function password_verify() {
-        return true;
-        // add api calls
-    }
-
-}
 
 
