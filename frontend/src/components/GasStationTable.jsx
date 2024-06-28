@@ -15,7 +15,6 @@ const tableHeadStyles = {
   backgroundColor: 'var(--primary-color)',
   '& th': {
     color: 'white',
-    fontWeight: 'bold',
     fontFamily: 'var(--font-family)',
   },
 };

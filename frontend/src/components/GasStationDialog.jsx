@@ -16,8 +16,10 @@ export default function GasStationDialog({ open, onClose, onSearch }) {
           width: 'auto',
           maxWidth: 'none',
           fontFamily: 'var(--font-family)',
-          padding: '5px',
+          paddingLeft: '20px',
+          paddingRight: '20px',
           paddingTop: '10px',
+          paddingBottom: '5px',
           borderRadius: '30px',
         },
       }}
@@ -38,9 +40,9 @@ export default function GasStationDialog({ open, onClose, onSearch }) {
 
       <Divider
         sx={{
-          backgroundColor: 'rgba(0, 123, 255, 0.5)',
-          width: '90%',
-          margin: 'auto',
+            backgroundColor: 'rgba(0, 123, 255, 0.5)',
+            width: '90%',
+            margin: 'auto',
         }}
       />
 
