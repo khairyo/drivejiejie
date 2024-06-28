@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 
 // import components
-import MapComponent from './components/map.jsx';
+import MapComponent from './components/Map.jsx';
 import GasStationDialog from './components/GasStationDialog.jsx';
-import Menu from './components/menu.jsx';
+import Menu from './components/Menu.jsx';
 
 // import css
 import './App.css';
