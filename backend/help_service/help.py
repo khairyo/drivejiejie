@@ -5,6 +5,9 @@ from flask_cors import CORS
 from pydantic import BaseModel
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 app = Flask(__name__)
 
@@ -44,18 +47,19 @@ def create_tip():
     use this end point to create tips to be stored in db
     """
     try:
-        data = request.get_json()
-        issue_insert=Issue(issue_type=data.get('issueType'),
-                        tips=data.get('tips'),
-                        service_provider=[],
-                        ).model_dump()
-        providers=data.get('serviceProvider')
-        for i in providers:
-            issue_insert['service_provider'].append(Service_provider(name=i["name"],
-                                                                   desc=i["desc"],
-                                                                   phone=i["phone"]).model_dump())
+        all_data = request.get_json().get('tips')
+        for tip in all_data:
+            issue_insert=Issue(issue_type=tip['issueType'],
+                            tips=tip['tips'],
+                            service_provider=[],
+                            ).model_dump()
+            providers=tip['serviceProvider']
+            for i in providers:
+                issue_insert['service_provider'].append(Service_provider(name=i["name"],
+                                                                    desc=i["desc"],
+                                                                    phone=i["phone"]).model_dump())
 
-        result = tips_collection.insert_one(issue_insert)
+            result = tips_collection.insert_one(issue_insert)
         print(result)
         return jsonify(
             {

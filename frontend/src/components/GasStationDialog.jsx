@@ -1,37 +1,53 @@
-import * as React from 'react'; 
-// import Button from '@mui/material/Button'; 
-import Dialog from '@mui/material/Dialog'; 
-// import DialogActions from '@mui/material/DialogActions'; 
-import DialogContent from '@mui/material/DialogContent'; 
-import DialogContentText from '@mui/material/DialogContentText'; 
-import DialogTitle from '@mui/material/DialogTitle'; 
- 
-// import css 
-// import '../css/gas-station-dialog.module.css'; 
- 
-export default function GasStationDialog({ open, onClose }) { 
-  return ( 
-    <Dialog 
-      open={open} 
-      onClose={onClose} 
-      aria-labelledby="alert-dialog-title" 
-      aria-describedby="alert-dialog-description" 
-      className="gas-station-dialog" 
-    > 
-      <DialogTitle id="alert-dialog-title"> 
-        {"Compare Latest Fuel Prices"} 
-      </DialogTitle> 
-      <DialogContent> 
-        <DialogContentText id="alert-dialog-description"> 
-          bing bing bong bong
-        </DialogContentText> 
-      </DialogContent> 
-      {/* <DialogActions> 
-        <Button onClick={onClose}>Disagree</Button> 
-        <Button onClick={onClose} autoFocus> 
-          Agree 
-        </Button> 
-      </DialogActions>  */}
-    </Dialog> 
-  ); 
+import React from 'react';
+import { Divider, Dialog, DialogContent, DialogTitle } from '@mui/material';
+import GasStationTable from './GasStationTable';
+
+export default function GasStationDialog({ open, onClose, onSearch }) {
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+      className="gas-station-dialog"
+      maxWidth={false}
+      PaperProps={{
+        sx: {
+          width: 'auto',
+          maxWidth: 'none',
+          fontFamily: 'var(--font-family)',
+          padding: '5px',
+          paddingTop: '10px',
+          borderRadius: '30px',
+        },
+      }}
+    >
+      {/* dialog title */}
+      <DialogTitle
+        id="alert-dialog-title"
+        sx={{
+          textAlign: 'center',
+          fontFamily: 'var(--font-family)',
+          fontSize: '18px',
+          fontWeight: 'bold',
+          color: 'var(--primary-color)',
+        }}
+      >
+        {"Compare Today's Fuel Prices"}
+      </DialogTitle>
+
+      <Divider
+        sx={{
+          backgroundColor: 'rgba(0, 123, 255, 0.5)',
+          width: '90%',
+          margin: 'auto',
+        }}
+      />
+
+      {/* dialog content */}
+      <DialogContent sx={{ fontFamily: 'var(--font-family)' }}>
+        <GasStationTable onSearch={onSearch} />
+      </DialogContent>
+    </Dialog>
+  );
 }
