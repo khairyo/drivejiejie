@@ -1,9 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Home } from './pages/Home'
-import { LoginPage } from './pages/loginPage';
-import { RegisterPage } from './pages/registerPage';
+import { useState } from 'react';
+import { Button } from '@mui/material';
 
+// import components
+import MapComponent from './components/Map.jsx';
+import GasStationDialog from './components/GasStationDialog.jsx';
+import Menu from './components/Menu.jsx';
+
+// import css
+import './App.css';
 
 function App() {
     // MUI component custom styling (button)
