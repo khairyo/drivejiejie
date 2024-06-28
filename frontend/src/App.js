@@ -1,14 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
-import { Button } from '@mui/material';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Home } from './pages/Home'
+import { LoginPage } from './pages/loginPage';
+import { RegisterPage } from './pages/registerPage';
 
-// import components
-import MapComponent from './components/map.jsx';
-import GasStationDialog from './components/GasStationDialog.jsx';
-import Menu from './components/menu.jsx';
-
-// import css
-import './App.css';
 
 function App() {
     // MUI component custom styling (button)
@@ -42,7 +37,6 @@ function App() {
     };
     // const email = 'sushimallows8@gmail.com';
     const [email, setEmail] = useState('sushimallows8@gmail.com');
-
     const [userName, setUserName] = useState('Khairyo');
 
     return (

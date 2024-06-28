@@ -5,6 +5,7 @@ import HamburgerMenu from '../components/HamburgerMenu.jsx';
 import MapComponent from '../components/Map.jsx';
 import GasStationDialog from '../components/GasStationDialog.jsx';
 import VehicleServicesDialog from '../components/VehicleServicesDialog.jsx';
+import Menu from '../components/Menu.jsx';
 import driveJieJieLogo from '../images/drivejiejie-logo-blue.png';
 import { Button } from '@mui/material';
 
@@ -39,10 +40,27 @@ export function Home() {
     setVehicleDialogOpen(false);
   };
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // const handleMenuClick = () => {
+  //     setMenuOpen(true);
+  // };
+
+  const handleMenuClose = () => {
+      setMenuOpen(false);
+  };
+  const [email, setEmail] = useState('sushimallows8@gmail.com');
+  const [userName, setUserName] = useState('Khairyo');
+
   return (
     <div className="App">
       <div className="menu-bar">
-        <HamburgerMenu className="hamburger-menu" />
+        <Menu
+          email={email}
+          userName={userName}
+          open={menuOpen}
+          onClose={handleMenuClose}
+        />
         <Button sx={buttonStyle} variant="contained" color="primary">
           Carparks
         </Button>
