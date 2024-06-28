@@ -7,6 +7,9 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from geojson import Point
 from geojson_pydantic import Feature, FeatureCollection, Point
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 app = Flask(__name__)
 
@@ -53,20 +56,21 @@ def create_tip():
     use this end point to create gas station entries to be stored in db
     """
     try:
-        data = request.get_json()
-        gas_insert=GasStation(name=data.get('name'),
-                        address=data.get('address'),
-                        location=data.get('location'),
-                        add_services=data.get('addServices'),
-                        avail_fuel=[]
-                        ).model_dump()
-        fuel=data.get('availFuel')
-        for i in fuel:
-            gas_insert['avail_fuel'].append(FuelType(type=i['type'],
-                                                     cost_per_litre=i['costPerLitre']).model_dump())
+        all_data = request.get_json()
+        for station in all_data.get("station"):
+            gas_insert=GasStation(name=station['name'],
+                            address=station['address'],
+                            location=station['location'],
+                            add_services=station['addServices'],
+                            avail_fuel=[]
+                            ).model_dump()
+            fuel=station['availFuel']
+            for i in fuel:
+                gas_insert['avail_fuel'].append(FuelType(type=i['type'],
+                                                        cost_per_litre=i['costPerLitre']).model_dump())
 
-        result = gas_station_collection.insert_one(gas_insert)
-        print(result)
+            result = gas_station_collection.insert_one(gas_insert)
+            print(result)
         return jsonify(
             {
                 "code": 201,

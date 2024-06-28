@@ -42,7 +42,6 @@ function App() {
     };
     // const email = 'sushimallows8@gmail.com';
     const [email, setEmail] = useState('sushimallows8@gmail.com');
-
     const [userName, setUserName] = useState('Khairyo');
 
     return (
