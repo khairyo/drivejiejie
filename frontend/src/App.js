@@ -1,11 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
-import { Button } from '@mui/material';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ProtectedRoutes from './components/ProtectedRoutes';
 
-// import components
-import MapComponent from './components/Map.jsx';
-import GasStationDialog from './components/GasStationDialog.jsx';
-import Menu from './components/Menu.jsx';
+// import pages
+import { Home } from './pages/Home'
+import { LoginPage } from './pages/loginPage';
+import { RegisterPage } from './pages/registerPage';
 
 // import css
 import './App.css';
@@ -15,9 +15,13 @@ export default function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+
         </Routes>
       </div>
     </Router>
