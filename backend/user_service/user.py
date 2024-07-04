@@ -1,5 +1,6 @@
 import os, sys, json
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, session, request, redirect, url_for
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, get_jwt
 from os import environ
 from flask_cors import CORS
 from pydantic import BaseModel
@@ -14,6 +15,12 @@ load_dotenv(find_dotenv())
 app = Flask(__name__)
 
 CORS(app)
+
+app.config['SECRET_KEY'] = environ.get("SECRET_KEY")
+app.config["JWT_SECRET_KEY"] = environ.get("JWT_SECRET_KEY") #need define this in env
+app.config['JWT_TOKEN_LOCATION'] = ['headers']
+
+jwt = JWTManager(app)
 
 bcrypt = Bcrypt(app) #use this to hash passwords
 
@@ -81,8 +88,8 @@ def create_tip():
         ), 400
     
 
-@app.route("/userlogin")
-def get_tips():
+@app.route("/userlogin", methods=['POST'])
+def get_user():
     """
     Use this endpoint to log user in 
     below is the structure to sue for the payload
@@ -96,21 +103,23 @@ def get_tips():
         is_valid = bcrypt.check_password_hash(user['password'], data.get('password')) 
         if is_valid == True:
             user["_id"]=None
+            access_token = create_access_token(identity=username)
             return jsonify(
                 {
                     "code": 200,
                     "data": user,
                     "message": "User found",
+                    'access_token': access_token
                 }
             ), 201
         else:
             return jsonify(
             {
-                "code": 400,
+                "code": 401,
                 "data": request.get_json(),
                 "message": "User not found, or password incorrect." ,
             }
-        ), 400
+        ), 401
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -132,6 +141,19 @@ def get_tips():
                 "message": "User not found, or password incorrect." ,
             }
         ), 400
+    
+@app.route('/get_name', methods=['GET'])
+@jwt_required()
+def get_name():
+    # Extract the user ID from the JWT
+    user_id = get_jwt_identity()
+    user = user_collection.find_one({'username':user_id})
+
+    # Check if user exists
+    if user:
+        return jsonify({'message': 'User found', 'name': user['username']})
+    else:
+        return jsonify({'message': 'User not found'}), 404
 
 
 if __name__ == "__main__":
