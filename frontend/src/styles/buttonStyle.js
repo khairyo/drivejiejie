@@ -6,4 +6,6 @@ export const buttonStyle = {
   fontFamily: 'var(--font-family)',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
   marginLeft: '10px',
+  paddingLeft: '20px',
+  paddingRight: '20px',
 };
