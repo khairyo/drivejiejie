@@ -89,7 +89,7 @@ def create_tip():
     
 
 @app.route("/userlogin", methods=['POST'])
-def get_user()
+def get_user():
     """
     Use this endpoint to log user in 
     below is the structure to sue for the payload
