@@ -81,7 +81,7 @@ def create_tip():
         ), 400
     
 
-@app.route("/userlogin")
+@app.route("/userlogin", methods=['POST'])
 def get_tips():
     """
     Use this endpoint to log user in 
