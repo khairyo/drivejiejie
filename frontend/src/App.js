@@ -6,6 +6,7 @@ import ProtectedRoutes from './components/ProtectedRoutes';
 import { Home } from './pages/Home'
 import { LoginPage } from './pages/loginPage';
 import { RegisterPage } from './pages/registerPage';
+import { Clear } from './pages/clear';
 
 // import css
 import './App.css';
@@ -15,6 +16,7 @@ export default function App() {
     <Router>
       <div>
         <Routes>
+          <Route path='/clear' element={<Clear />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           
