@@ -6,7 +6,7 @@ import axios from 'axios';
 import '../App.css';
 import djjlogo from '../images/drivejiejie-logo-blue.png';
 
-export function LoginPage() {
+export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [auth, setAuth] = useState(false);
