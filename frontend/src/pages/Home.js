@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // import components
-import HamburgerMenu from '../components/HamburgerMenu.jsx';
+// import HamburgerMenu from '../components/HamburgerMenu.jsx';
 import MapComponent from '../components/Map.jsx';
 import GasStationDialog from '../components/GasStationDialog.jsx';
 import VehicleServicesDialog from '../components/VehicleServicesDialog.jsx';

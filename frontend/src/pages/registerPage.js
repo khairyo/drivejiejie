@@ -5,7 +5,7 @@ import axios from 'axios';
 import '../App.css';
 import djjlogo from '../images/drivejiejie-logo-blue.png';
 
-export function RegisterPage() {
+export default function RegisterPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
