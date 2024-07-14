@@ -20,9 +20,9 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/" element={<Home />} />
-          </Route>
+          {/* <Route element={<ProtectedRoutes />}> */}
+          <Route path="/" element={<Home />} />
+          {/* </Route> */}
 
         </Routes>
       </div>
