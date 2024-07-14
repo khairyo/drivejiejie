@@ -85,12 +85,6 @@ const CameraOCR = () => {
                     </ul>
                 </div>
             )}
-            {detectedText && (
-                <div>
-                    <h2>Detected Text:</h2>
-                    <p>{detectedText}</p>
-                </div>
-            )}
         </div>
     );
 };
