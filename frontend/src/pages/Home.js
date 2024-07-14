@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { LoadScript } from '@react-google-maps/api';
 
 // import components
 import MapComponent from '../components/Map.jsx';
@@ -62,6 +63,7 @@ export function Home() {
     setSearchQuery('vehicle service');
     setSearchType('');
   };
+  
 
   return (
     <div className="App">
@@ -82,8 +84,12 @@ export function Home() {
           Vehicle services
         </Button>
       </div>
-
+      <LoadScript 
+        id="script-loader"
+        googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        >
       <MapComponent searchQuery={searchQuery} searchType={searchType} />
+      </LoadScript>
 
       <GasStationDialog open={gasDialogOpen} onClose={handleGasDialogClose} onSearch={handleSearch} />
       <VehicleServicesDialog open={vehicleDialogOpen} onClose={handleVehicleDialogClose} onServiceSelect={handleSearch} />

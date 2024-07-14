@@ -46,7 +46,7 @@ def health():
     return jsonify({"code": 200, "message": "User service running"}), 200
 
 @app.route("/createuser", methods=['POST'])
-def create_tip():
+def create_user():
     """
     use this end point to create tips to be stored in db
     """
@@ -89,7 +89,7 @@ def create_tip():
     
 
 @app.route("/userlogin", methods=['POST'])
-def get_user()
+def get_user():
     """
     Use this endpoint to log user in 
     below is the structure to sue for the payload
