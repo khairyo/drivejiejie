@@ -4,8 +4,8 @@ import ProtectedRoutes from './components/ProtectedRoutes';
 
 // import pages
 import { Home } from './pages/Home'
-import { LoginPage } from './pages/loginPage';
-import { RegisterPage } from './pages/registerPage';
+import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
 import { Clear } from './pages/clear';
 import CameraOCR from './components/CameraOCR';
 

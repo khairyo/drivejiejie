@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from flask_socketio import SocketIO, emit
 import os
 import base64
 from paddleocr import PaddleOCR
@@ -9,8 +10,15 @@ import numpy as np
 import re
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS for all routes
+socketio = SocketIO(app, cors_allowed_origins="*")  # Initialize Flask-SocketIO with CORS enabled
+
 ocr = PaddleOCR(use_angle_cls=True, lang='ch')  # Initialize PaddleOCR
+
+# In-memory storage for carpark availability
+carpark_availability = {
+    "northpoint_city_south_wing": None
+}
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -37,10 +45,28 @@ def upload_file():
     # Print the numbers to the console
     if numbers:
         print("Detected Numbers:", numbers)
+        # Update carpark availability
+        carpark_availability['northpoint_city_south_wing'] = numbers[0]
+        # Emit the updated availability to all connected clients
+        socketio.emit('update_availability', carpark_availability)
     else:
         print("No numbers detected.")
     
     return jsonify({'text_result': numbers})
 
+@app.route('/update_carpark_availability', methods=['POST'])
+def update_carpark_availability():
+    data = request.json
+    if 'availability' in data:
+        carpark_availability['northpoint_city_south_wing'] = data['availability']
+        socketio.emit('update_availability', carpark_availability)
+        return jsonify({'status': 'success'}), 200
+    else:
+        return jsonify({'status': 'error', 'message': 'No availability provided'}), 400
+
+@app.route('/get_carpark_availability', methods=['GET'])
+def get_carpark_availability():
+    return jsonify(carpark_availability), 200
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)

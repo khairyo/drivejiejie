@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const CameraOCR = () => {
     const videoRef = useRef(null);
-    const [ocrResult, setOcrResult] = useState(null);
+    const [ocrResult, setOcrResult] = useState([]);
+    const [detectedText, setDetectedText] = useState(null);
 
     useEffect(() => {
         const getVideo = () => {
@@ -44,11 +45,18 @@ const CameraOCR = () => {
                     'Content-Type': 'application/json'
                 }
             });
-            setOcrResult(response.data.text_result);
-            
+            console.log('Server response:', response.data);
+            const detectedNumbers = response.data.text_result;
+
+            setOcrResult(detectedNumbers);
+
             // Log the OCR result to the console for debugging
-            if (response.data.text_result.length > 0) {
-                console.log("Detected Numbers:", response.data.text_result);
+            if (detectedNumbers.length > 0) {
+                console.log("Detected Numbers:", detectedNumbers);
+                // Update carpark availability in the backend
+                await axios.post('http://127.0.0.1:5000/update_carpark_availability', { availability: detectedNumbers[0] });
+                // Update detected text state
+                setDetectedText(detectedNumbers[0]);
             }
         } catch (error) {
             console.error('Error uploading image:', error);
@@ -67,7 +75,7 @@ const CameraOCR = () => {
         <div>
             <h1>Camera OCR</h1>
             <video ref={videoRef} style={{ width: '100%', maxWidth: '600px' }}></video>
-            {ocrResult && (
+            {ocrResult.length > 0 && (
                 <div>
                     <h2>Detected Numbers:</h2>
                     <ul>
@@ -75,6 +83,12 @@ const CameraOCR = () => {
                             <li key={index}>{text}</li>
                         ))}
                     </ul>
+                </div>
+            )}
+            {detectedText && (
+                <div>
+                    <h2>Detected Text:</h2>
+                    <p>{detectedText}</p>
                 </div>
             )}
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
-import CloseIcon from '@mui/icons-material/Close';
+import axios from 'axios';
+import io from 'socket.io-client';
 
 const containerStyle = {
   width: '100%',
@@ -8,26 +9,53 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 1.429406,
-  lng: 103.835936,
+  lat: 1.2966,
+  lng: 103.8520,
 };
 
 const options = {
   disableDefaultUI: true,
 };
 
-function MapComponent({ searchQuery }) {
+const socket = io('http://127.0.0.1:5000');  // Initialize socket.io client
+
+function MapComponent({ searchQuery, searchType }) {
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [carparkAvailability, setCarparkAvailability] = useState(null);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          setCurrentLocation(pos);
+          if (map) {
+            map.setCenter(pos);
+          }
+        },
+        () => {
+          console.error("Error: The Geolocation service failed.");
+        }
+      );
+    } else {
+      console.error("Error: Your browser doesn't support geolocation.");
+    }
+  }, [map]);
 
   useEffect(() => {
     if (map && searchQuery) {
       const service = new window.google.maps.places.PlacesService(map);
       const request = {
-        location: center,
-        radius: '5000',
+        location: currentLocation || center,
+        radius: searchType === 'carpark' ? '2000' : '5000', // 2km for carparks, 5km for others
         keyword: searchQuery,
+        type: searchType === 'carpark' ? 'parking' : undefined,
       };
 
       service.nearbySearch(request, (results, status) => {
@@ -36,8 +64,8 @@ function MapComponent({ searchQuery }) {
             position: place.geometry.location,
             name: place.name,
             address: place.vicinity,
-            rating: place.rating,
-            phone: place.formatted_phone_number,
+            rating: place.rating || 'N/A',
+            phone: place.formatted_phone_number || 'N/A',
             place_id: place.place_id,
           }));
           setMarkers(newMarkers);
@@ -49,7 +77,33 @@ function MapComponent({ searchQuery }) {
         }
       });
     }
-  }, [map, searchQuery]);
+  }, [map, searchQuery, currentLocation, searchType]);
+
+  useEffect(() => {
+    const fetchCarparkAvailability = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:5000/get_carpark_availability');
+        setCarparkAvailability(response.data.northpoint_city_south_wing);
+      } catch (error) {
+        console.error('Error fetching carpark availability:', error);
+      }
+    };
+
+    fetchCarparkAvailability();
+  }, []);
+
+  useEffect(() => {
+    // Listen for updates from the backend
+    socket.on('update_availability', (data) => {
+      console.log('Received update from server:', data);
+      setCarparkAvailability(data.northpoint_city_south_wing);
+    });
+
+    // Cleanup on component unmount
+    return () => {
+      socket.off('update_availability');
+    };
+  }, []);
 
   const onLoad = (mapInstance) => {
     setMap(mapInstance);
@@ -68,8 +122,8 @@ function MapComponent({ searchQuery }) {
           position: marker.position,
           name: place.name,
           address: place.formatted_address,
-          phone: place.formatted_phone_number,
-          rating: place.rating,
+          phone: place.formatted_phone_number || 'N/A',
+          rating: place.rating || 'N/A',
         });
       } else {
         console.error('PlacesService failed to get details due to:', status);
@@ -104,10 +158,32 @@ function MapComponent({ searchQuery }) {
           <div style={{ fontFamily: 'var(--font-family)', padding: '10px' }}>
             <h2 style={{ color: 'var(--primary-color)', margin: '0 0 10px 0' }}>{selectedMarker.name}</h2>
             <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>{selectedMarker.address}</p>
-            <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>Rating: {selectedMarker.rating}</p>
-            <p style={{ margin: '0', fontSize: '14px' }}>Phone: {selectedMarker.phone}</p>
+            <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>
+              Rating: <em>{selectedMarker.rating}</em>
+            </p>
+            <p style={{ margin: '0', fontSize: '14px' }}>
+              Phone: <em>{selectedMarker.phone}</em>
+            </p>
+            {selectedMarker.name.toLowerCase().includes('northpoint city south wing carpark') && (
+              <p style={{ margin: '0', fontSize: '14px' }}>
+                Carpark Availability: <em>{carparkAvailability || 'N/A'}</em>
+              </p>
+            )}
           </div>
         </InfoWindow>
+      )}
+      {currentLocation && (
+        <Marker
+          position={currentLocation}
+          icon={{
+            path: window.google.maps.SymbolPath.CIRCLE,
+            scale: 8,
+            fillColor: '#4285F4',
+            fillOpacity: 1,
+            strokeColor: '#ffffff',
+            strokeWeight: 2,
+          }}
+        />
       )}
     </GoogleMap>
   );

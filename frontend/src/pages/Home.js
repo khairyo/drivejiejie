@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 // import components
-// import HamburgerMenu from '../components/HamburgerMenu.jsx';
 import MapComponent from '../components/Map.jsx';
 import GasStationDialog from '../components/GasStationDialog.jsx';
 import VehicleServicesDialog from '../components/VehicleServicesDialog.jsx';
@@ -17,6 +16,10 @@ export function Home() {
   const [gasDialogOpen, setGasDialogOpen] = useState(false);
   const [vehicleDialogOpen, setVehicleDialogOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchType, setSearchType] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [email, setEmail] = useState('sushimallows8@gmail.com');
+  const [userName, setUserName] = useState('Khairyo');
 
   const handleGasDialogOpen = () => {
     setGasDialogOpen(true);
@@ -36,21 +39,29 @@ export function Home() {
 
   const handleSearch = (selectedService) => {
     setSearchQuery(selectedService);
+    setSearchType(selectedService.toLowerCase().includes('carpark') ? 'carpark' : '');
     setGasDialogOpen(false);
     setVehicleDialogOpen(false);
   };
 
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  // const handleMenuClick = () => {
-  //     setMenuOpen(true);
-  // };
-
   const handleMenuClose = () => {
-      setMenuOpen(false);
+    setMenuOpen(false);
   };
-  const [email, setEmail] = useState('sushimallows8@gmail.com');
-  const [userName, setUserName] = useState('Khairyo');
+
+  const handleCarparksSearch = () => {
+    setSearchQuery('carpark');
+    setSearchType('carpark');
+  };
+
+  const handleGasStationsSearch = () => {
+    setSearchQuery('gas station');
+    setSearchType('');
+  };
+
+  const handleVehicleServicesSearch = () => {
+    setSearchQuery('vehicle service');
+    setSearchType('');
+  };
 
   return (
     <div className="App">
@@ -61,7 +72,7 @@ export function Home() {
           open={menuOpen}
           onClose={handleMenuClose}
         />
-        <Button sx={buttonStyle} variant="contained" color="primary">
+        <Button sx={buttonStyle} variant="contained" color="primary" onClick={handleCarparksSearch}>
           Carparks
         </Button>
         <Button sx={buttonStyle} variant="contained" color="primary" onClick={handleGasDialogOpen}>
@@ -72,7 +83,7 @@ export function Home() {
         </Button>
       </div>
 
-      <MapComponent searchQuery={searchQuery} />
+      <MapComponent searchQuery={searchQuery} searchType={searchType} />
 
       <GasStationDialog open={gasDialogOpen} onClose={handleGasDialogClose} onSearch={handleSearch} />
       <VehicleServicesDialog open={vehicleDialogOpen} onClose={handleVehicleDialogClose} onServiceSelect={handleSearch} />
