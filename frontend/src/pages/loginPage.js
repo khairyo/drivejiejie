@@ -17,6 +17,7 @@ export function LoginPage() {
         try {
             const response = await axios.post('http://127.0.0.1:8004/userlogin', user);
             localStorage.setItem("access_token", response.data.access_token);
+            localStorage.setItem("username", response.data.data.username);
             alert("Login successful");
             setAuth(true)
         } catch (error) {

@@ -69,8 +69,8 @@ export function Home() {
     <div className="App">
       <div className="menu-bar">
         <Menu
-          email={email}
-          userName={userName}
+          email={localStorage.getItem("email") ? localStorage.getItem("email") : email}
+          userName={localStorage.getItem("username")}
           open={menuOpen}
           onClose={handleMenuClose}
         />
@@ -84,13 +84,7 @@ export function Home() {
           Vehicle services
         </Button>
       </div>
-      <LoadScript 
-        id="script-loader"
-        googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-        >
       <MapComponent searchQuery={searchQuery} searchType={searchType} />
-      </LoadScript>
-
       <GasStationDialog open={gasDialogOpen} onClose={handleGasDialogClose} onSearch={handleSearch} />
       <VehicleServicesDialog open={vehicleDialogOpen} onClose={handleVehicleDialogClose} onServiceSelect={handleSearch} />
 
