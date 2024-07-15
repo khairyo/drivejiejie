@@ -39,7 +39,8 @@ user_collection=db["user"]
 
 class User(BaseModel):
     username: str
-    password: str  
+    password: str
+    email_add: str
 
 @app.route("/")
 def health():
@@ -54,7 +55,8 @@ def create_user():
         data = request.get_json()
         hashed_password = bcrypt.generate_password_hash(data.get('password')).decode('utf-8')
         user_insert=User(username=data.get('username'),
-                        password=hashed_password).model_dump()
+                        password=hashed_password,
+                        email_add=data.get('email')).model_dump()
 
         result = user_collection.insert_one(user_insert)
         print(result)

@@ -69,7 +69,7 @@ export function Home() {
     <div className="App">
       <div className="menu-bar">
         <Menu
-          email={localStorage.getItem("email") ? localStorage.getItem("email") : email}
+          email={localStorage.getItem("email")}
           userName={localStorage.getItem("username")}
           open={menuOpen}
           onClose={handleMenuClose}
