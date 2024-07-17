@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { IconButton,  Button } from '@mui/material';
 
 // import components
 import MapComponent from '../components/Map.jsx';
 import GasStationDialog from '../components/GasStationDialog.jsx';
 import VehicleServicesDialog from '../components/VehicleServicesDialog.jsx';
 import Menu from '../components/Menu.jsx';
+import RobotDialog from '../components/RobotDialog.jsx';
+
+// import images
 import driveJieJieLogo from '../images/drivejiejie-logo-blue.png';
-import { Button } from '@mui/material';
+import robotButton from '../images/chatbot.png';
 
 // import styles
 import '../App.css';
@@ -20,7 +24,8 @@ export function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [email, setEmail] = useState('sushimallows8@gmail.com');
   const [userName, setUserName] = useState('Khairyo');
-
+  const [robotDialogOpen, setRobotDialogOpen] = useState(false); 
+  
   const handleGasDialogOpen = () => {
     setGasDialogOpen(true);
   };
@@ -63,6 +68,14 @@ export function Home() {
     setSearchType('');
   };
 
+  const handleRobotDialogOpen = () => {
+    setRobotDialogOpen(true);
+  };
+
+  const handleRobotDialogClose = () => {
+    setRobotDialogOpen(false);
+  };
+
   return (
     <div className="App">
       <div className="menu-bar">
@@ -93,6 +106,25 @@ export function Home() {
         <img src={driveJieJieLogo} alt="DriveJieJie Logo" className="drivejiejie-logo" />
         <span>Drive</span>JieJie
       </div>
+
+      {/* Robot Button */}
+      <IconButton
+        onClick={handleRobotDialogOpen}
+        style={{
+          position: 'fixed',
+          bottom: 20,
+          right: 20,
+          padding: 8,
+          borderRadius: '50%',
+          backgroundColor: '#1887fd',
+          boxShadow: '0 0 10px rgba(0,0,0,0.2)',
+        }}
+      >
+        <img src={robotButton} alt="Robot Button" style={{ width: 40, height: 40 }} />
+      </IconButton>
+
+      {/* Robot Dialog */}
+      <RobotDialog open={robotDialogOpen} onClose={handleRobotDialogClose} />
     </div>
   );
 }
