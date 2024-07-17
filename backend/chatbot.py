@@ -1,6 +1,6 @@
 import os
-from flask import Flask, render_template, request, jsonify
-from flask_socketio import SocketIO, send, emit
+from flask import Flask, request, jsonify
+from flask_socketio import SocketIO
 import requests
 from dotenv import load_dotenv
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
-OLLAMA_API_ENDPOINT = 'http://localhost:11434/api/chat'  # Example endpoint from the docs, replace with your actual endpoint if different
+OLLAMA_API_ENDPOINT = 'http://localhost:11434/api/chat'  # Confirm this endpoint is correct
 OLLAMA_API_KEY = os.getenv('OLLAMA_API_KEY')
 
 @app.route('/api/ollama', methods=['POST'])
@@ -44,4 +44,4 @@ def get_response():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, port=5000, debug=True)  # Ensure the port matches the one used in React
