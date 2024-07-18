@@ -17,7 +17,7 @@ const options = {
   disableDefaultUI: true,
 };
 
-const socket = io('http://127.0.0.1:5000');  // Initialize socket.io client
+const socket = io('http://127.0.0.1:5000'); 
 
 function MapComponent({ searchQuery, searchType }) {
   const [map, setMap] = useState(null);
@@ -53,7 +53,7 @@ function MapComponent({ searchQuery, searchType }) {
       const service = new window.google.maps.places.PlacesService(map);
       const request = {
         location: currentLocation || center,
-        radius: searchType === 'carpark' ? '2000' : '5000', // 2km for carparks, 5km for others
+        radius: searchType === 'carpark' ? '2000' : '5000', 
         keyword: searchQuery,
         type: searchType === 'carpark' ? 'parking' : undefined,
       };
@@ -93,13 +93,11 @@ function MapComponent({ searchQuery, searchType }) {
   }, []);
 
   useEffect(() => {
-    // Listen for updates from the backend
     socket.on('update_availability', (data) => {
       console.log('Received update from server:', data);
       setCarparkAvailability(data.northpoint_city_south_wing);
     });
 
-    // Cleanup on component unmount
     return () => {
       socket.off('update_availability');
     };

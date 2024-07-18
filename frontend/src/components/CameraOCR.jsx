@@ -50,12 +50,9 @@ const CameraOCR = () => {
 
             setOcrResult(detectedNumbers);
 
-            // Log the OCR result to the console for debugging
             if (detectedNumbers.length > 0) {
                 console.log("Detected Numbers:", detectedNumbers);
-                // Update carpark availability in the backend
                 await axios.post('http://127.0.0.1:5000/update_carpark_availability', { availability: detectedNumbers[0] });
-                // Update detected text state
                 setDetectedText(detectedNumbers[0]);
             }
         } catch (error) {
@@ -66,7 +63,7 @@ const CameraOCR = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             captureImage();
-        }, 5000); // Capture image every 5 seconds
+        }, 5000);
 
         return () => clearInterval(interval);
     }, []);
