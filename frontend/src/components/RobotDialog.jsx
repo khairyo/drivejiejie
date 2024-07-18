@@ -1,6 +1,21 @@
 import React, { useState } from 'react';
 import { Dialog, Button, TextField, CircularProgress } from '@mui/material';
 import axios from 'axios';
+import '../App.css'; // Assuming you have a CSS file for global styles
+
+const buttonStyles = {
+  backgroundColor: 'var(--primary-color)',
+  borderRadius: 'var(--border-radius)',
+  color: 'white',
+  textTransform: 'none',
+  fontFamily: 'var(--font-family)',
+  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+  fontSize: '14px',
+};
+
+const textFieldStyles = {
+  fontFamily: 'var(--font-family)',
+};
 
 const RobotDialog = ({ open, onClose }) => {
   const [query, setQuery] = useState('');
@@ -33,33 +48,33 @@ const RobotDialog = ({ open, onClose }) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <div style={{ padding: 20 }}>
-        <h2>Ask the AI</h2>
+      <div className="robot-dialog-container">
+        <h2 className="dialog-title">Ask DriveJieJie anything!</h2>
         <TextField
-          label="Your Question"
+          label="Question"
           variant="outlined"
           fullWidth
           value={query}
           onChange={handleInputChange}
-          style={{ marginBottom: '20px' }}
+          className="dialog-input"
+          sx={textFieldStyles}
         />
-        <Button
-          onClick={handleSubmit}
-          variant="contained"
-          color="primary"
-          disabled={loading}
-        >
-          {loading ? <CircularProgress size={24} /> : 'Submit'}
-        </Button>
+        <div style={{ textAlign: 'right' }}>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+            disabled={loading}
+            sx={{ ...buttonStyles, marginTop: '15px' }}
+          >
+            {loading ? <CircularProgress size={22} /> : 'Submit'}
+          </Button>
+        </div>
         {response && (
-          <div style={{ marginTop: '20px' }}>
-            <h3>Response:</h3>
-            <p>{response}</p>
+          <div className="response-container">
+            <p className="response-text">{response}</p>
           </div>
         )}
-        <Button onClick={onClose} variant="contained" color="secondary" style={{ marginTop: '20px' }}>
-          Close
-        </Button>
       </div>
     </Dialog>
   );
