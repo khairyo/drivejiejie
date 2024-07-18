@@ -4,9 +4,10 @@ import ProtectedRoutes from './components/ProtectedRoutes';
 
 // import pages
 import { Home } from './pages/Home'
-import { LoginPage } from './pages/loginPage';
-import { RegisterPage } from './pages/registerPage';
+import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
 import { Clear } from './pages/clear';
+import CameraOCR from './components/CameraOCR';
 
 // import css
 import './App.css';
@@ -20,9 +21,11 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/" element={<Home />} />
-          </Route>
+          {/* <Route element={<ProtectedRoutes />}> */}
+          <Route path="/" element={<Home />} />
+          {/* </Route> */}
+
+          <Route path="/camera-ocr" element={<CameraOCR />} />
 
         </Routes>
       </div>
