@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS for all routes
+CORS(app, resources={r"/*": {"origins": "*"}}) 
 
 OLLAMA_API_ENDPOINT = 'http://localhost:11434/api/generate'
 

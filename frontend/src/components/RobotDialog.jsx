@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog, Button, TextField, CircularProgress } from '@mui/material';
 import axios from 'axios';
-import '../App.css'; // Assuming you have a CSS file for global styles
+import '../App.css'; 
 
 const buttonStyles = {
   backgroundColor: 'var(--primary-color)',
