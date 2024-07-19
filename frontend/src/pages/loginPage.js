@@ -5,10 +5,13 @@ import axios from 'axios';
 // import css
 import '../App.css';
 import djjlogo from '../images/drivejiejie-logo-blue.png';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [visible, setVisible] = useState(false);
     const [auth, setAuth] = useState(false);
 
     const handleSubmit = async (event) => {
@@ -22,8 +25,6 @@ export function LoginPage() {
             alert("Login successful");
             setAuth(true)
         } catch (error) {
-            console.error(error);
-            // Display error message to user
             alert("Login unsuccessful. Please try again.");
         }
     };
@@ -50,7 +51,7 @@ export function LoginPage() {
                                         autoComplete="off" />
                                 </div>
                                 <div className='input-field'>
-                                    <input type='password'
+                                    <input type={visible ? "text" : "password"}
                                         name='password'
                                         required
                                         className='login-text-field'
@@ -58,6 +59,9 @@ export function LoginPage() {
                                         onChange={(event) => { setPassword(event.target.value) }}
                                         placeholder='Password'
                                         autoComplete="off" />
+                                    <div className='visibility-btn' onClick={() => {setVisible(!visible)}}>
+                                        {visible ? <Visibility /> : <VisibilityOff />}
+                                    </div>
                                 </div>
                             </div>
 
@@ -67,7 +71,7 @@ export function LoginPage() {
                         </form>
 
                         <div className='register-link'>
-                            <a href='./signup'>First time? Sign up here</a>
+                            <a href='./register'>First time? Sign up here</a>
                         </div>
                     </div>
                 </div>

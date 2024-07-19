@@ -10,12 +10,11 @@ import numpy as np
 import re
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS for all routes
-socketio = SocketIO(app, cors_allowed_origins="*")  # Initialize Flask-SocketIO with CORS enabled
+CORS(app, resources={r"/*": {"origins": "*"}}) 
+socketio = SocketIO(app, cors_allowed_origins="*") 
 
-ocr = PaddleOCR(use_angle_cls=True, lang='ch')  # Initialize PaddleOCR
+ocr = PaddleOCR(use_angle_cls=True, lang='ch')  
 
-# In-memory storage for carpark availability
 carpark_availability = {
     "northpoint_city_south_wing": None
 }
@@ -27,27 +26,21 @@ def upload_file():
         return jsonify({'error': 'No image data'}), 400
     
     image_data = data['image']
-    image_data = image_data.split(",")[1]  # Remove the "data:image/jpeg;base64," part
+    image_data = image_data.split(",")[1]  
     image = Image.open(BytesIO(base64.b64decode(image_data)))
 
-    # Convert PIL Image to numpy array
     image = np.array(image)
 
     result = ocr.ocr(image, cls=True)
     text_result = [line[1][0] for line in result[0]]
     
-    # Print the full OCR result to the console for debugging
     print("Full OCR Result:", text_result)
     
-    # Filter out numbers
     numbers = [text for text in text_result if re.search(r'\d', text)]
     
-    # Print the numbers to the console
     if numbers:
         print("Detected Numbers:", numbers)
-        # Update carpark availability
         carpark_availability['northpoint_city_south_wing'] = numbers[0]
-        # Emit the updated availability to all connected clients
         socketio.emit('update_availability', carpark_availability)
     else:
         print("No numbers detected.")
