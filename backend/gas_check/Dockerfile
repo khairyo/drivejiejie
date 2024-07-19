@@ -16,4 +16,4 @@ EXPOSE 5002
 ENV FLASK_APP=app.py
 
 # Run app.py when the container launches
-CMD ["python", "user.py", "--host=0.0.0.0"]`
+CMD ["python", "app.py", "--host=0.0.0.0"]`

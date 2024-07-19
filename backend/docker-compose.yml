@@ -3,40 +3,6 @@ version: "3.8" # Use a version compatible with your Docker engine
 #volumes:
 
 services:
-  carpark:
-    build: ./carpark_service
-    restart: always
-    image: carpark:1.0
-    ports:
-      - "8002:8002" # Map the host port to the container port
-    # environment:
-    #   - SERVER_ADDRESS: 0.0.0.0:5000
-    #   - CLIENT_ORIGIN_URL: ${ClIENT_ORIGIN_URL}
-    #   - AUTH_AUDIENCE: ${AUTH_AUDIENCE}
-    #   - AUTH_DOMAIN: ${AUTH_DOMAIN}
-    #   - OPENAPI_SERVER_ADDRESS: ${OPENAPI_SERVER_ADDRESS}
-    env_file:
-      - ./.env
-    # volumes:
-    #   - .:/app # Maps the current directory to the /app directory in the container
-  
-  gas_station:
-    build: ./gas_station_service
-    image: gas:1.0
-    restart: always
-    ports:
-      - "8003:8003"
-    env_file:
-      - ./.env
-    # volumes: 
-  
-  help:
-    build: ./help_service
-    image: help:1.0
-    ports:
-      - "8001:8001"
-    env_file:
-      - ./.env
 
   user:
     build: ./user_service

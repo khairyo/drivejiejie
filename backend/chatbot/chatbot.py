@@ -17,7 +17,7 @@ def get_response():
         'Content-Type': 'application/json',
     }
 
-    prompt = f"{query}\nMake you response as brief as possible; limit it to 400 characters and avoid using any bold or italic formatting."
+    prompt = f"{query}\nMake your response as brief as possible; limit it to 400 characters and avoid using any bold or italic formatting."
 
     payload = {
         "model": "llama3:8b",
