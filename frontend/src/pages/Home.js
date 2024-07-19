@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IconButton,  Button } from '@mui/material';
+import { LoadScript } from '@react-google-maps/api';
 
 // import components
 import MapComponent from '../components/Map.jsx';
@@ -75,13 +76,14 @@ export function Home() {
   const handleRobotDialogClose = () => {
     setRobotDialogOpen(false);
   };
+  
 
   return (
     <div className="App">
       <div className="menu-bar">
         <Menu
-          email={email}
-          userName={userName}
+          email={localStorage.getItem("email")}
+          userName={localStorage.getItem("username")}
           open={menuOpen}
           onClose={handleMenuClose}
         />
@@ -95,9 +97,7 @@ export function Home() {
           Vehicle services
         </Button>
       </div>
-
       <MapComponent searchQuery={searchQuery} searchType={searchType} />
-
       <GasStationDialog open={gasDialogOpen} onClose={handleGasDialogClose} onSearch={handleSearch} />
       <VehicleServicesDialog open={vehicleDialogOpen} onClose={handleVehicleDialogClose} onServiceSelect={handleSearch} />
 

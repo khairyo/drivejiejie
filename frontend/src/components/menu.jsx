@@ -16,6 +16,8 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import iconImage from '../images/drivejiejie-logo-blue.png';
 import tipImage from '../images/tips-logo.png';
+import { Navigate } from 'react-router-dom';
+import{ Clear } from '../pages/clear.js'
 
 export default function HamburgerMenu({ email, userName }) {
     const [open, setOpen] = React.useState(false);
@@ -23,6 +25,7 @@ export default function HamburgerMenu({ email, userName }) {
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
+
 
     const DrawerList = (
         <Box
@@ -112,8 +115,12 @@ export default function HamburgerMenu({ email, userName }) {
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
+                        
                     ))}
                 </List>
+                <Button href="./clear">
+                    Logout
+                </Button>
             </Box>
         </Box>
     );

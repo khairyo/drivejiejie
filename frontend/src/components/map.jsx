@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
 import axios from 'axios';
 import io from 'socket.io-client';
 
@@ -25,6 +25,11 @@ function MapComponent({ searchQuery, searchType }) {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [carparkAvailability, setCarparkAvailability] = useState(null);
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+  })
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -133,7 +138,7 @@ function MapComponent({ searchQuery, searchType }) {
     setSelectedMarker(null);
   };
 
-  return (
+  return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
@@ -184,7 +189,7 @@ function MapComponent({ searchQuery, searchType }) {
         />
       )}
     </GoogleMap>
-  );
+  ): <></>
 }
 
 export default MapComponent;

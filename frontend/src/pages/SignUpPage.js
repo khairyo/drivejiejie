@@ -5,39 +5,37 @@ import axios from 'axios';
 // import css
 import '../App.css';
 import djjlogo from '../images/drivejiejie-logo-blue.png';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export function LoginPage() {
+export function SignUpPage() {
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [visible, setVisible] = useState(false);
-    const [auth, setAuth] = useState(false);
+    const [create, setCreate] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const user = { username, password };
+        const user = { username, password, email };
         try {
-            const response = await axios.post('http://127.0.0.1:8004/userlogin', user);
-            localStorage.setItem("access_token", response.data.access_token);
-            localStorage.setItem("username", response.data.data.username);
-            localStorage.setItem("email", response.data.data.email_add);
-            alert("Login successful");
-            setAuth(true)
+            const response = await axios.post('http://127.0.0.1:8004/createuser', user);
+            console.log(response.data);
+            setCreate(true);
+            alert("User created successfully");
         } catch (error) {
-            alert("Login unsuccessful. Please try again.");
+            console.error(error);
+            // Display error message to user
+            alert("User creation unsuccessful, try again later.");
         }
     };
 
-    if (auth) {
-        return <Navigate to='/' />
+    if (create === true) {
+        return <Navigate to='/login' />
     } else {
         return (
             <div className="auth-page">
                 <div className="auth-white-bg">
                     <div className="form-box">
-                        <p className="outfit-font">Welcome Back!</p>
-                        <p className="outfit-font2">It's terrific to see you again.</p>
+                        <p className="outfit-font">It’s great to get to know you.</p>
+                        <p className="outfit-font2">Begin your adventure with us!</p>
                         <form method="POST" name="login_form" onSubmit={handleSubmit}>
                             <div className='input-group'>
                                 <div className='input-field'>
@@ -51,7 +49,17 @@ export function LoginPage() {
                                         autoComplete="off" />
                                 </div>
                                 <div className='input-field'>
-                                    <input type={visible ? "text" : "password"}
+                                    <input type='text'
+                                        name='email'
+                                        required
+                                        value={email}
+                                        onChange={(event) => { setEmail(event.target.value) }}
+                                        className='login-text-field'
+                                        placeholder='Email'
+                                        autoComplete="off" />
+                                </div>
+                                <div className='input-field'>
+                                    <input type='password'
                                         name='password'
                                         required
                                         className='login-text-field'
@@ -59,9 +67,6 @@ export function LoginPage() {
                                         onChange={(event) => { setPassword(event.target.value) }}
                                         placeholder='Password'
                                         autoComplete="off" />
-                                    <div className='visibility-btn' onClick={() => {setVisible(!visible)}}>
-                                        {visible ? <Visibility /> : <VisibilityOff />}
-                                    </div>
                                 </div>
                             </div>
 
@@ -71,7 +76,7 @@ export function LoginPage() {
                         </form>
 
                         <div className='register-link'>
-                            <a href='./register'>First time? Sign up here</a>
+                            <a href='./login'>Already have an account? Log in here!</a>
                         </div>
                     </div>
                 </div>

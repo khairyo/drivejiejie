@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.12.1
+FROM python:3.10.8
 
 # Set the working directory in the container
 WORKDIR /app
@@ -11,6 +11,7 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5002
+
 # Define environment variable
 ENV FLASK_APP=app.py
 

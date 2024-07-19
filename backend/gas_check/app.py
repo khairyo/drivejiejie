@@ -28,4 +28,4 @@ def get_fuel_prices():
   return jsonify({'headers': headers, 'rows': rows})
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(port=5002, debug=True)

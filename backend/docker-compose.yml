@@ -46,31 +46,29 @@ services:
     env_file:
       - ./.env
 
-  gas_check:
-    build: ./gas_check
-    image: gas_check:1.0
-    ports:
-      - "5002:5002"
-    env_file:
+  gas_check: 
+    build: ./gas_check 
+    image: gas_check:1.0 
+    ports: 
+      - "5002:5002" 
+    env_file: 
+      - ./.env 
+ 
+  ocr: 
+    build: ./ocr 
+    image: ocr:1.0 
+    ports: 
+      - "5000:5000" 
+    env_file: 
+      - ./.env 
+ 
+  chatbot: 
+    build: ./chatbot 
+    image: chatbot:1.0 
+    ports: 
+      - "5001:5001" 
+    env_file: 
       - ./.env
-
-  ocr:
-    build: ./ocr
-    image: ocr:1.0
-    ports:
-      - "5000:5000"
-    env_file:
-      - ./.env
-
-  chatbot:
-    build: ./chatbot
-    image: chatbot:1.0
-    ports:
-      - "11434:11434"
-    env_file:
-      - ./.env
-  
-
   
 
 
