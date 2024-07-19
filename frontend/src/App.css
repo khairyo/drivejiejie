@@ -185,9 +185,49 @@ input.login-text-field {
   margin-left: 50%;
 }
 
-
 /* Registration Page */
 .register-btn-location {
   position: relative;
   margin-left: 53%;
+}
+
+/* robot dialog */
+.robot-dialog-container {
+  padding: 20px 30px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.dialog-title {
+  font-family: var(--font-family);
+  color: var(--primary-color);
+  font-size: 21px;
+  margin-bottom: 30px;
+}
+
+.dialog-input {
+  margin-bottom: 20px;
+}
+
+.dialog-button {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 40px;
+  font-family: var(--font-family);
+  text-transform: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.response-container {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.response-text {
+  font-family: var(--font-family);
+  font-size: 16px;
+  white-space: pre-line;
+  margin-left: 4px;
+  margin-right: 4px;
 }
