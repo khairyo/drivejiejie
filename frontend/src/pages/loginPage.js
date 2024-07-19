@@ -5,10 +5,13 @@ import axios from 'axios';
 // import css
 import '../App.css';
 import djjlogo from '../images/drivejiejie-logo-blue.png';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [visible, setVisible] = useState(false);
     const [auth, setAuth] = useState(false);
 
     const handleSubmit = async (event) => {
@@ -16,12 +19,12 @@ export function LoginPage() {
         const user = { username, password };
         try {
             const response = await axios.post('http://127.0.0.1:8004/userlogin', user);
-            localStorage.setItem("access_token", response.data.access_token);
-            alert("Login successful");
-            setAuth(true)
+            if (response.data.access_token !== undefined) {
+                localStorage.setItem("access_token", response.data.access_token);
+                alert("Login successful");
+                setAuth(true);
+            }
         } catch (error) {
-            console.error(error);
-            // Display error message to user
             alert("Login unsuccessful. Please try again.");
         }
     };
@@ -48,7 +51,7 @@ export function LoginPage() {
                                         autoComplete="off" />
                                 </div>
                                 <div className='input-field'>
-                                    <input type='password'
+                                    <input type={visible ? "text" : "password"}
                                         name='password'
                                         required
                                         className='login-text-field'
@@ -56,17 +59,19 @@ export function LoginPage() {
                                         onChange={(event) => { setPassword(event.target.value) }}
                                         placeholder='Password'
                                         autoComplete="off" />
+                                    <div className='visibility-btn' onClick={() => {setVisible(!visible)}}>
+                                        {visible ? <Visibility /> : <VisibilityOff />}
+                                    </div>
                                 </div>
                             </div>
 
                             <div className='login-btn-location'>
                                 <input className='login-btn' type='submit' value="Let's Go!" />
                             </div>
+                            <div className='register-link'>
+                                <a href='./register'>First time? Sign up here</a>
+                            </div>
                         </form>
-
-                        <div className='register-link'>
-                            <a href='./register'>First time? Sign up here</a>
-                        </div>
                     </div>
                 </div>
 

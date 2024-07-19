@@ -5,10 +5,13 @@ import axios from 'axios';
 // import css
 import '../App.css';
 import djjlogo from '../images/drivejiejie-logo-blue.png';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export function RegisterPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [visible, setVisible] = useState(false);
     const [auth, setAuth] = useState(false);
 
     const handleSubmit = async (event) => {
@@ -17,11 +20,10 @@ export function RegisterPage() {
         try {
             const response = await axios.post('http://127.0.0.1:8004/createuser', user);
             alert("Registration successful. Please login here!");
-            setAuth(true)
-            return response // idk if this is necessary i js put it here cos it gave a warning
+            setAuth(true);
+            return response;
         } catch (error) {
-            console.error(error);
-            alert("Registration unsuccessful. Please try again.");
+            alert("Registration unsuccessful. Please try again later.");
         }
     };
 
@@ -32,8 +34,8 @@ export function RegisterPage() {
             <div className="auth-page">
                 <div className="auth-white-bg">
                     <div className="form-box">
-                        <p className="outfit-font">It's great to get to know you.</p>
-                        <p className="outfit-font2">Begin your adventure with us!</p>
+                        <p className="outfit-font">Let's get to know you!</p>
+                        <p className="outfit-font2">Begin your adventure with us.</p>
                         <form method="POST" name="register_form" onSubmit={handleSubmit}>
                             <div className='input-group'>
                                 <div className='input-field'>
@@ -47,7 +49,7 @@ export function RegisterPage() {
                                         autoComplete="off" />
                                 </div>
                                 <div className='input-field'>
-                                    <input type='password'
+                                    <input type={visible ? "text" : "password"}
                                         name='password'
                                         required
                                         className='login-text-field'
@@ -55,10 +57,13 @@ export function RegisterPage() {
                                         onChange={(event) => { setPassword(event.target.value) }}
                                         placeholder='Password'
                                         autoComplete="off" />
+                                    <div className='visibility-btn' onClick={() => {setVisible(!visible)}}>
+                                        {visible ? <Visibility /> : <VisibilityOff />}
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className='register-btn-location'>
+                            <div className='login-btn-location'>
                                 <input className='login-btn' type='submit' value="Take me in!" />
                             </div>
                         </form>
