@@ -3,7 +3,7 @@ import { IconButton,  Button } from '@mui/material';
 import { LoadScript } from '@react-google-maps/api';
 
 // import components
-import MapComponent from '../components/Map.jsx';
+import MapComponent from '../components/Map2.jsx';
 import GasStationDialog from '../components/GasStationDialog.jsx';
 import VehicleServicesDialog from '../components/VehicleServicesDialog.jsx';
 import Menu from '../components/Menu.jsx';

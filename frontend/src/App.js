@@ -4,9 +4,8 @@ import ProtectedRoutes from './components/ProtectedRoutes';
 
 // import pages
 import { Home } from './pages/Home'
-import { LoginPage } from './pages/LoginPage';
-import { SignUpPage } from './pages/SignUpPage';
-import { RegisterPage } from './pages/RegisterPage';
+import { LoginPage } from './pages/Login';
+import { RegisterPage } from './pages/Register';
 import { Clear } from './pages/clear';
 import CameraOCR from './components/CameraOCR';
 
@@ -20,7 +19,6 @@ export default function App() {
         <Routes>
           <Route path='/clear' element={<Clear />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/register" element={<RegisterPage />} />
           
           <Route element={<ProtectedRoutes />}>
