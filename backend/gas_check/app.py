@@ -17,7 +17,6 @@ def get_fuel_prices():
 
   soup = BeautifulSoup(response.content, 'html.parser')
 
-  # extract table
   table = soup.find('table')
 
   headers = [th.text.strip() for th in table.find_all('th')]
@@ -30,4 +29,3 @@ def get_fuel_prices():
 
 if __name__ == '__main__':
   app.run(debug=True)
-
