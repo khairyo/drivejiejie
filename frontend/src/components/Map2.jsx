@@ -8,9 +8,10 @@ const containerStyle = {
   height: '100vh',
 };
 
+// yishun mrt
 const center = {
-  lat: 1.2966,
-  lng: 103.8520,
+  lat: 1.4296,
+  lng: 103.8353,
 };
 
 const options = {
