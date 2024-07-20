@@ -6,7 +6,7 @@ import { LoadScript } from '@react-google-maps/api';
 import MapComponent from '../components/Map.jsx';
 import GasStationDialog from '../components/GasStationDialog.jsx';
 import VehicleServicesDialog from '../components/VehicleServicesDialog.jsx';
-import Menu from '../components/Menu.jsx';
+// import Menu from '../components/Menu.jsx';
 import RobotDialog from '../components/RobotDialog.jsx';
 
 // import images

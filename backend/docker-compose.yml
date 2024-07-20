@@ -9,19 +9,3 @@ services:
       - "8004:8004"
     env_file:
       - ./.env
-
-  gas_check:
-    build: ./gas_check
-    image: gas_check:1.0
-    ports:
-      - "5002:5002"
-    env_file:
-      - ./.env
-
-  chatbot:
-    build: ./chatbot
-    image: chatbot:1.0
-    ports:
-      - "5001:5001"
-    env_file:
-      - ./.env
