@@ -9,7 +9,7 @@ Welcome to DriveJieJie, your all-in-one driving assistant app. This app provides
 **Overview**: Provides real-time updates on carpark availability.  
 **Functionality**: When the camera detects a number in front of it, it updates the carpark availability within the Google location marker popup. This eliminates the need to physically drive to the carpark to check availability.
 
-**Note:** The OCR functionality works best with the Singapore carpark availability signboard font. It is less accurate with handwritten numbers or non-standard fonts.
+**Note:** The OCR functionality works best with the Singapore carpark availability signboard font (i.e. the solid red digital numbers). It is less accurate with handwritten numbers or non-standard fonts.
 
 To ensure your center location is set to Yishun MRT and to enable testing of the OCR camera functionality, follow these steps:
 
