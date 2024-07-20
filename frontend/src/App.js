@@ -23,9 +23,9 @@ export default function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/register" element={<RegisterPage />} />
           
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/" element={<Home />} />
-          </Route>
+          {/* <Route element={<ProtectedRoutes />}> */}
+          <Route path="/" element={<Home />} />
+          {/* </Route> */}
 
           <Route path="/camera-ocr" element={<CameraOCR />} />
 

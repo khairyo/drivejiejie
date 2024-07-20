@@ -81,12 +81,12 @@ export function Home() {
   return (
     <div className="App">
       <div className="menu-bar">
-        <Menu
+        {/* <Menu
           email={localStorage.getItem("email")}
           userName={localStorage.getItem("username")}
           open={menuOpen}
           onClose={handleMenuClose}
-        />
+        /> */}
         <Button sx={buttonStyle} variant="contained" color="primary" onClick={handleCarparksSearch}>
           Carparks
         </Button>
