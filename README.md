@@ -1,12 +1,10 @@
 # DriveJieJie Web App
 
-DriveJieJie is a comprehensive driving app that offers various features to make driving more convenient and less stressful. It includes real-time carpark availability updates, real-time gas station prices, and a chatbot for answering driving-related questions.
+Welcome to DriveJieJie, your all-in-one driving assistant app. This app provides real-time updates on carpark availability and gas station prices, and features a dynamic chatbot built on Ollama AI to answer all your driving-related queries. The app also includes typical map features like live location tracking and map pins/popups for various locations.
 
 ## Features
 
 ### Real-time Carpark Availability
-
-The focus was on ensuring the camera live update functionality worked, which is why the carpark availability updates are currently hardcoded to Northpoint City South Wing Carpark. In real-life scenarios, the camera would be wired to an actual live carpark availability signboard for real-time updates.
 
 **Overview**: Provides real-time updates on carpark availability.  
 **Functionality**: When the camera detects a number in front of it, it updates the carpark availability within the Google location marker popup. This eliminates the need to physically drive to the carpark to check availability.
@@ -44,6 +42,8 @@ To ensure your center location is set to Yishun MRT and to enable testing of the
 4. Select "Northpoint City South Wing Carpark" from the map pins.
 5. In another browser tab, navigate to `http://localhost:3000/camera-ocr`.
 6. Hold up a number to the camera. The camera takes snapshots every 5 seconds, and if it detects a number, it updates the carpark availability for "Northpoint City South Wing Carpark" in the popup.
+
+The focus was on ensuring the camera live update functionality worked, which is why the carpark availability updates are currently hardcoded to Northpoint City South Wing Carpark. In real-life scenarios, the camera would be wired to an actual live carpark availability signboard for real-time updates.
 
 ### Real-time Gas Station Prices
 
