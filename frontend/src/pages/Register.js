@@ -10,24 +10,24 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export function RegisterPage() {
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
     const [auth, setAuth] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const user = { username, password };
+        const user = { username, password, email };
         try {
             const response = await axios.post('http://127.0.0.1:8004/createuser', user);
             alert("Registration successful. Please login here!");
             setAuth(true);
-            return response;
         } catch (error) {
             alert("Registration unsuccessful. Please try again later.");
         }
     };
 
-    if (auth) {
+    if (auth === true) {
         return <Navigate to='/login' />
     } else {
         return (
@@ -49,6 +49,16 @@ export function RegisterPage() {
                                         autoComplete="off" />
                                 </div>
                                 <div className='input-field'>
+                                    <input type='text'
+                                        name='email'
+                                        required
+                                        value={email}
+                                        onChange={(event) => { setEmail(event.target.value) }}
+                                        className='login-text-field'
+                                        placeholder='Email'
+                                        autoComplete="off" />
+                                </div>
+                                <div className='input-field'>
                                     <input type={visible ? "text" : "password"}
                                         name='password'
                                         required
@@ -67,7 +77,10 @@ export function RegisterPage() {
                                 <input className='login-btn' type='submit' value="Take me in!" />
                             </div>
                         </form>
-
+                        
+                        <div className='register-link'>
+                            <a href='./login'>Already have an account? Log in here!</a>
+                        </div>
                     </div>
                 </div>
 
