@@ -36,7 +36,7 @@ To ensure your center location is set to Yishun MRT and to enable testing of the
     //   }
     // }, [map]);
     ```
-    This ensures your center location is set to Yishun MRT. After doing this, when you select the carpark button, the map pin for "Northpoint City South Wing Carpark" will appear. Click on it to see the 'carpark availability' line in the popup.
+    This ensures your center location is set to Yishun MRT. After doing this, when you select the carpark button, the map pin for "Northpoint City South Wing Carpark" will appear. Click on it to see the 'Carpark Availability' in the popup.
 
 3. Click the carpark button to display map pins for various carparks.
 4. Select "Northpoint City South Wing Carpark" from the map pins.
