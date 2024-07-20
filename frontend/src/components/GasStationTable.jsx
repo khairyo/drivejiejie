@@ -45,7 +45,7 @@ export default function GasStationTable({ onSearch }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:5000/api/fuel-prices');
+        const response = await axios.get('http://127.0.0.1:5002/api/fuel-prices');
         setRows(response.data.rows);
         setLoading(false);
       } catch (error) {

@@ -17,7 +17,7 @@ const options = {
   disableDefaultUI: true,
 };
 
-const socket = io('http://127.0.0.1:5000'); 
+const socket = io('http://127.0.0.1:5002'); 
 
 function MapComponent({ searchQuery, searchType }) {
   const [map, setMap] = useState(null);

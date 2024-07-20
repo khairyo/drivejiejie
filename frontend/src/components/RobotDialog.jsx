@@ -33,7 +33,7 @@ const RobotDialog = ({ open, onClose }) => {
     setResponse('');
 
     try {
-      const res = await axios.post('http://localhost:5001/api/ollama', { query }, {
+      const res = await axios.post('http://127.0.0.1:5001/api/ollama', { query }, {
         headers: {
           'Content-Type': 'application/json',
         },
