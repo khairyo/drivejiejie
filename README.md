@@ -12,7 +12,7 @@ Welcome to DriveJieJie, your all-in-one driving assistant app. This app provides
 To ensure your center location is set to Yishun MRT and to enable testing of the OCR camera functionality, follow these steps:
 
 1. Navigate to `/frontend/src/components/Map2.jsx`.
-2. Comment out lines 35-55 to turn off live location:
+2. Comment out lines 35-55, as such, to turn off live location:
     ```
     // useEffect(() => {
     //   if (navigator.geolocation) {
