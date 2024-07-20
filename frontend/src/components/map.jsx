@@ -162,14 +162,14 @@ function MapComponent({ searchQuery, searchType }) {
             <h2 style={{ color: 'var(--primary-color)', margin: '0 0 10px 0' }}>{selectedMarker.name}</h2>
             <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>{selectedMarker.address}</p>
             <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>
-              Rating: <em>{selectedMarker.rating}</em>
+              Rating: {selectedMarker.rating}
             </p>
             <p style={{ margin: '0', fontSize: '14px' }}>
-              Phone: <em>{selectedMarker.phone}</em>
+              Phone: {selectedMarker.phone}
             </p>
             {selectedMarker.name.toLowerCase().includes('northpoint city south wing carpark') && (
               <p style={{ margin: '0', fontSize: '14px' }}>
-                Carpark Availability: <em>{carparkAvailability || 'N/A'}</em>
+                Carpark Availability: {carparkAvailability || 'N/A'}
               </p>
             )}
           </div>
