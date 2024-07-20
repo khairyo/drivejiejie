@@ -41,7 +41,7 @@ To ensure your center location is set to Yishun MRT and to enable testing of the
 3. Click the carpark button to display map pins for various carparks.
 4. Select "Northpoint City South Wing Carpark" from the map pins.
 5. In another browser tab, navigate to `http://localhost:3000/camera-ocr`.
-6. Hold up a number to the camera. The camera takes snapshots every 5 seconds, and if it detects a number, it updates the carpark availability for "Northpoint City South Wing Carpark" in the popup.
+6. Hold up a number to the camera. The camera takes snapshots every 5 seconds, and when it detects a number or a change in number, it updates the carpark availability for "Northpoint City South Wing Carpark" in the popup.
 
 The focus was on ensuring the camera live update functionality worked, which is why the carpark availability updates are currently hardcoded to Northpoint City South Wing Carpark. In real-life scenarios, the camera would be wired to an actual live carpark availability signboard for real-time updates.
 
