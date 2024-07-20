@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8003
 
 # Define environment variable
-ENV FLASK_APP=app.py
+ENV FLASK_APP=gas.py
 
 # Run app.py when the container launches
 CMD ["python", "gas.py", "--host=0.0.0.0"]`
