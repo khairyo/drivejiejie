@@ -55,7 +55,7 @@ The focus was on ensuring the camera live update functionality worked, which is 
 **Overview**: A chatbot built on Ollama AI that provides dynamic and insightful responses.  
 **Functionality**: Click the chatbot icon on the bottom right and ask a question. The chatbot answers inquiries regarding driving, such as "how do I decide what type of petrol to buy" or "how do I change my car oil," adding convenience.
 
-The chatbot uses the llama3:8b Ollama model, which generally provides accurate responses. However, due to CPU limitations, it may take some time to respond. For reference, on a laptop with an Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz 1.50GHz, it took approximately 45 seconds to answer the question "how to change my car oil".
+The chatbot uses the llama3:8b Ollama model, chosen for its accurate responses. However, due to CPU limitations, it may take some time to respond. For reference, on a laptop with an Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz 1.50GHz, it took approximately 45 seconds to answer the question "how to change my car oil".
 
 ### Typical Map Features
 
