@@ -19,7 +19,7 @@ carpark_availability = {
     "northpoint_city_south_wing": None
 }
 
-@app.route('/upload', methods=['POST'])
+@app.route('/api/upload', methods=['POST'])
 def upload_file():
     data = request.json
     if 'image' not in data:
@@ -47,7 +47,7 @@ def upload_file():
     
     return jsonify({'text_result': numbers})
 
-@app.route('/update_carpark_availability', methods=['POST'])
+@app.route('/api/update_carpark_availability', methods=['POST'])
 def update_carpark_availability():
     data = request.json
     if 'availability' in data:
@@ -57,7 +57,7 @@ def update_carpark_availability():
     else:
         return jsonify({'status': 'error', 'message': 'No availability provided'}), 400
 
-@app.route('/get_carpark_availability', methods=['GET'])
+@app.route('/api/get_carpark_availability', methods=['GET'])
 def get_carpark_availability():
     return jsonify(carpark_availability), 200
 

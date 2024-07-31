@@ -19,7 +19,7 @@ export function RegisterPage() {
         event.preventDefault();
         const user = { username, password, email };
         try {
-            const response = await axios.post('http://127.0.0.1:8004/createuser', user);
+            const response = await axios.post('http://127.0.0.1:8004/api/createuser', user);
             alert("Registration successful. Please login here!");
             setAuth(true);
         } catch (error) {
