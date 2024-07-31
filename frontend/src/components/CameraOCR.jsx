@@ -40,7 +40,7 @@ const CameraOCR = () => {
         const imageData = canvas.toDataURL('image/jpeg');
 
         try {
-            const response = await axios.post('http://127.0.0.1:5000/upload', { image: imageData }, {
+            const response = await axios.post('http://127.0.0.1:5000/api/upload', { image: imageData }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -52,7 +52,7 @@ const CameraOCR = () => {
 
             if (detectedNumbers.length > 0) {
                 console.log("Detected Numbers:", detectedNumbers);
-                await axios.post('http://127.0.0.1:5000/update_carpark_availability', { availability: detectedNumbers[0] });
+                await axios.post('http://127.0.0.1:5000/api/update_carpark_availability', { availability: detectedNumbers[0] });
                 setDetectedText(detectedNumbers[0]);
             }
         } catch (error) {
