@@ -42,11 +42,11 @@ class User(BaseModel):
     password: str
     email_add: str
 
-@app.route("/")
-def health():
-    return jsonify({"code": 200, "message": "User service running"}), 200
+# @app.route("/")
+# def health():
+#     return jsonify({"code": 200, "message": "User service running"}), 200
 
-@app.route("/createuser", methods=['POST'])
+@app.route("/api/createuser", methods=['POST'])
 def create_user():
     """
     use this end point to create tips to be stored in db
@@ -90,7 +90,7 @@ def create_user():
         ), 400
     
 
-@app.route("/userlogin", methods=['POST'])
+@app.route("/api/userlogin", methods=['POST'])
 def get_user():
     """
     Use this endpoint to log user in 
@@ -144,7 +144,7 @@ def get_user():
             }
         ), 400
     
-@app.route('/get_name', methods=['GET'])
+@app.route('/api/get_name', methods=['GET'])
 @jwt_required()
 def get_name():
     # Extract the user ID from the JWT

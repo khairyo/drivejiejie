@@ -88,7 +88,7 @@ function MapComponent({ searchQuery, searchType }) {
   useEffect(() => {
     const fetchCarparkAvailability = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:5000/get_carpark_availability');
+        const response = await axios.get('http://127.0.0.1:5000/api/get_carpark_availability');
         setCarparkAvailability(response.data.northpoint_city_south_wing);
       } catch (error) {
         console.error('Error fetching carpark availability:', error);

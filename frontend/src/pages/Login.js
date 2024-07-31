@@ -18,7 +18,7 @@ export function LoginPage() {
         event.preventDefault();
         const user = { username, password };
         try {
-            const response = await axios.post('http://127.0.0.1:8004/userlogin', user);
+            const response = await axios.post('http://127.0.0.1:8004/api/userlogin', user);
             localStorage.setItem("access_token", response.data.access_token);
             localStorage.setItem("username", response.data.data.username);
             localStorage.setItem("email", response.data.data.email_add);
